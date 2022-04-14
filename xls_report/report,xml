@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>	
+        <record model="ir.ui.view" id="view_generic_report_form">
+            <field name="name">generic.report.wiz.form</field>
+            <field name="model">generic.report.wiz</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <group>
+                            <field name="date_param" required="1"/>
+                        </group>
+                    </group>
+                    <field name="file_name" invisible="1"/>
+                    <field name="file" readonly="1"
+                           filename="file_name" nolabel="1"
+                           attrs="{'invisible':[('file','=',False)]}"/>
+                    <footer>
+                        <button name="generic_report_download" string="Download Report" type="object" default_focus="1"/>
+                        <button name="cancel" string="Cancel" special='cancel' type="object" class="oe_highlight"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+        
+        <record id="action_generic_report" model="ir.actions.act_window">
+            <field name="name">Generic Report</field>
+            <field name="res_model">generic.report.wiz</field>
+            <field name="view_type">tree</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_generic_report_form"/>
+            <field name="target">new</field>
+        </record>
+    
+            
+        <menuitem id="menu_generic_report" 
+                  action="action_generic_report" 
+                  name="Generic Report" 
+                  parent="menu_main_reports" 
+                  sequence="1" groups="res_groups_insuranceuser0"/>
+        
+    </data>
+</odoo>
